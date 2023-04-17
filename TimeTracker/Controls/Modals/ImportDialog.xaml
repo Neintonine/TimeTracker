@@ -1,0 +1,27 @@
+﻿<UserControl x:Class="TimeTracker.Controls.Modals.ImportDialog"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TimeTracker.Controls.Modals"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             d:DesignHeight="400" d:DesignWidth="300">
+    <DockPanel Height="400" Width="300">
+        <DockPanel DockPanel.Dock="Top" Margin="0,5">
+            <Button x:Name="CloseButton" DockPanel.Dock="Right" Width="40" Content="{materialDesign:PackIcon Close}" Style="{StaticResource MaterialDesignToolButton}" Click="Button_Click_1" />
+            <TextBlock Text="Import" Style="{DynamicResource MaterialDesignHeadline6TextBlock}" HorizontalAlignment="Center" />
+        </DockPanel>
+
+        <Button x:Name="ContinueButton" IsEnabled="false" Content="Continue" DockPanel.Dock="Bottom" Click="ContinueButton_Click" />
+
+        <StackPanel>
+            <DockPanel>
+                <Button DockPanel.Dock="Right" Content="..." Style="{StaticResource MaterialDesignToolButton}" HorizontalAlignment="Right" Click="Button_Click"/>
+                <TextBox x:Name="PathInput" materialDesign:HintAssist.Hint="Path" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Text="" Height="40" Margin="5,0"/>
+            </DockPanel>
+            <Label x:Name="PathResponse" Content="" Foreground="Red" />
+
+        </StackPanel>
+    </DockPanel>
+</UserControl>
