@@ -37,7 +37,13 @@ namespace TimeTracker.Controls
 
             _data = Content as DataGrid;
 
-            _data.RowEditEnding += Data_RowEditEnding;
+            _data.CurrentCellChanged += _data_CurrentCellChanged;
+            //_data.RowEditEnding += Data_RowEditEnding;
+        }
+
+        private void _data_CurrentCellChanged(object sender, EventArgs e)
+        {
+            _data.CommitEdit();
         }
 
         private void Data_RowEditEnding(object sender, DataGridRowEditEndingEventArgs e)
@@ -54,11 +60,6 @@ namespace TimeTracker.Controls
             }
 
             ItemsSource.Remove(item);
-        }
-
-        private void SetStatusBooked(object sender, RoutedEventArgs e)
-        {
-            
         }
     }
 }

@@ -49,7 +49,11 @@ namespace TimeTracker.Types
 
         public Status BookingStatus
         {
-            get => _status; set => _status = value;
+            get => _status; 
+            set {
+                _status = value; 
+                NotifyPropertyChanged("BookingStatus");
+            }
         }
 
         public bool ProjectIsSet => _project != null;

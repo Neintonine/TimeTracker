@@ -33,12 +33,12 @@
             <selector:StatusTemplateSelector.NoStatus>
                 <DataTemplate>
                     <UniformGrid HorizontalAlignment="Center" VerticalAlignment="Top" Rows="1">
-                        <Button Style="{DynamicResource MaterialDesignFlatButton}" Click="SetStatusBooked">
+                        <Button Style="{DynamicResource MaterialDesignFlatButton}" Command="{Binding SetStatusBooked}">
                             <Button.Content>
                                 <materialDesign:PackIcon Kind="Check" Foreground="Green" />
                             </Button.Content>
                         </Button>
-                        <Button Style="{DynamicResource MaterialDesignFlatButton}">
+                        <Button Style="{DynamicResource MaterialDesignFlatButton}" Command="{Binding SetStatusDontBook}">
                             <Button.Content>
                                 <materialDesign:PackIcon Kind="Close" Foreground="Red" />
                             </Button.Content>
@@ -84,7 +84,7 @@
             <materialDesign:DataGridTextColumn Header="From" Binding="{Binding From}" />
             <materialDesign:DataGridTextColumn Header="To" Binding="{Binding To}"/>
             <materialDesign:DataGridTextColumn IsReadOnly="True" Header="Duration" Binding="{Binding Duration}"/>
-            <DataGridTemplateColumn IsReadOnly="True" Header="Status" CellTemplateSelector="{StaticResource StatusSelector}"/>
+            <DataGridTemplateColumn Header="Status" CellTemplateSelector="{StaticResource StatusSelector}"/>
 
             <DataGridTemplateColumn Header="Project">
                 <DataGridTemplateColumn.CellTemplate>

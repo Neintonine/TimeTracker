@@ -16,18 +16,12 @@
         <Button x:Name="ContinueButton" Content="Continue" DockPanel.Dock="Bottom" Click="ContinueButton_Click" />
 
         <ScrollViewer>
-            
+
             <StackPanel>
 
-                <UniformGrid Rows="1" Columns="2">
-                    <TextBlock>
-                        Columns: <Run Text="{Binding ColumnsCount}" />
-                    </TextBlock>
-
-                    <TextBlock>
-                        Rows: <Run Text="{Binding RowsCount}" />
-                    </TextBlock>
-                </UniformGrid>
+                <TextBlock>
+                        Rows: <Run x:Name="RowCountDisplay" />
+                </TextBlock>
 
                 <TextBox materialDesign:HintAssist.Hint="StartRow" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Text="{Binding StartRow}" Height="40" Margin="5,0"/>
 

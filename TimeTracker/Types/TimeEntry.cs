@@ -1,7 +1,10 @@
 ﻿#nullable enable
+using Microsoft.Xaml.Behaviors.Core;
 using System;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Runtime.InteropServices;
+using System.Windows.Input;
 
 namespace TimeTracker.Types
 {
@@ -14,6 +17,9 @@ namespace TimeTracker.Types
             Booked,
         }
 
+        public ICommand SetStatusBooked { get; private set; }
+        public ICommand SetStatusDontBook { get; private set; }
+
         private DateTime _date;
         private DateTime? _from;
         private DateTime? _to;
@@ -21,13 +27,20 @@ namespace TimeTracker.Types
         private string? _project = null;
         private string? _action = null;
 
-
         public TimeEntry()
         {
             _date = DateTime.Today;
             
             _status = Status.NoStatus;
 
+            SetStatusBooked = new ActionCommand(() =>
+            {
+                BookingStatus = Status.Booked;
+            });
+            SetStatusDontBook = new ActionCommand(() =>
+            {
+                BookingStatus = Status.DontBook;
+            });
         }
         
         public bool HasValues()

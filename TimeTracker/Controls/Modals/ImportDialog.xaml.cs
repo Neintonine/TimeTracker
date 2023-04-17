@@ -26,7 +26,7 @@ namespace TimeTracker.Controls.Modals
     public partial class ImportDialog : UserControl
     {
         private const string MISSING_FILE_RESPONSE = "File does not exist.";
-        private const string MISSING_FILE_PERMISSIONS_RESPONSE = "Can't read file. Possibly missing permissions.";
+        private const string MISSING_FILE_PERMISSIONS_RESPONSE = "Can't read file. Possibly missing permissions or the file is used.";
         private const string FORMAT_NOT_SUPPORTED_RESPONSE = "Format is not supported.";
 
         private const string CORRECT_RESPONSE = "All ready";
@@ -118,12 +118,18 @@ namespace TimeTracker.Controls.Modals
             DialogHost.Close(null);
         }
 
-        private void ContinueButton_Click(object sender, RoutedEventArgs e)
+        private async void ContinueButton_Click(object sender, RoutedEventArgs e)
         {
             DialogHost.Close(null);
 
             ImportInterpretationDialog dialog = new ImportInterpretationDialog(_context);
-            dialog.LoadSpreadsheetData(PathInput.Text);
+
+            LoadingModal modal = LoadingModal.Display(null, "Interpret File...");
+
+            await dialog.LoadSpreadsheetData(PathInput.Text);
+
+            modal.Remove();
+
             DialogHost.Show(dialog);
         }
     }
