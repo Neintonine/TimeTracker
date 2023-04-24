@@ -23,27 +23,19 @@ namespace TimeTracker.Controls
     /// <summary>
     /// Interaction logic for DataControl.xaml
     /// </summary>
-    public partial class DataControl : UserControl
+    public partial class DataControl : DataGrid
     {
-        private DataGrid _data;
-
-        public ObservableCollection<TimeEntry> ItemsSource { get; set; }
-
         public DataControl()
         {
             InitializeComponent();
 
-            this.DataContext = this;
-
-            _data = Content as DataGrid;
-
-            _data.CurrentCellChanged += _data_CurrentCellChanged;
+            CurrentCellChanged += _data_CurrentCellChanged;
             //_data.RowEditEnding += Data_RowEditEnding;
         }
 
         private void _data_CurrentCellChanged(object sender, EventArgs e)
         {
-            _data.CommitEdit();
+            CommitEdit();
         }
 
         private void Data_RowEditEnding(object sender, DataGridRowEditEndingEventArgs e)
@@ -59,7 +51,7 @@ namespace TimeTracker.Controls
                 return;
             }
 
-            ItemsSource.Remove(item);
+            //ItemsSource.Remove(item);
         }
     }
 }

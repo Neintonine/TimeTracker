@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TimeTracker.Controls.Modals"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:parts="clr-namespace:TimeTracker.Controls.Parts"
              mc:Ignorable="d" 
              d:DesignHeight="400" d:DesignWidth="300">
     <DockPanel Height="400" Width="300">
@@ -16,10 +17,8 @@
         <Button x:Name="ContinueButton" IsEnabled="false" Content="Continue" DockPanel.Dock="Bottom" Click="ContinueButton_Click" />
 
         <StackPanel>
-            <DockPanel>
-                <Button DockPanel.Dock="Right" Content="..." Style="{StaticResource MaterialDesignToolButton}" HorizontalAlignment="Right" Click="Button_Click"/>
-                <TextBox x:Name="PathInput" materialDesign:HintAssist.Hint="Path" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Text="" Height="40" Margin="5,0"/>
-            </DockPanel>
+            <parts:FileSelect x:Name="FileSelect" />
+
             <Label x:Name="PathResponse" Content="" Foreground="Red" />
 
         </StackPanel>

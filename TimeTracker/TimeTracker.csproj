@@ -123,7 +123,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="ApplicationContext.cs" />
     <Compile Include="Controls\DataControl.xaml.cs">
       <DependentUpon>DataControl.xaml</DependentUpon>
     </Compile>
@@ -136,12 +135,21 @@
     <Compile Include="Controls\Modals\LoadingModal.xaml.cs">
       <DependentUpon>LoadingModal.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Parts\FileSelect.xaml.cs">
+      <DependentUpon>FileSelect.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Selector\NullTemplateSelector.cs" />
     <Compile Include="Selector\StatusTemplateSelector.cs" />
+    <Compile Include="Types\FileHandler.cs" />
     <Compile Include="Types\Prefs\IPreferenceHandler.cs" />
     <Compile Include="Types\Prefs\JsonPreferences.cs" />
+    <Compile Include="Types\SessionHandler.cs" />
     <Compile Include="Types\TimeEntry.cs" />
     <Compile Include="Types\TimeEntryPublic.cs" />
+    <Compile Include="ViewModels\DataEntryViewModel.cs" />
+    <Compile Include="ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="ViewModels\SessionViewModelBase.cs" />
+    <Compile Include="ViewModels\ViewModelBase.cs" />
     <Page Include="Controls\DataControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -159,6 +167,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\Modals\LoadingModal.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Parts\FileSelect.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -218,5 +230,6 @@
       <Version>13.0.3</Version>
     </PackageReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TimeTracker.Controls;
 using TimeTracker.Types;
 
 namespace TimeTracker
@@ -26,12 +27,6 @@ namespace TimeTracker
         public DataEntry()
         {
             InitializeComponent();
-            Data.ItemsSource = new ObservableCollection<TimeEntry>();
-        }
-
-        public void SetContext(ApplicationContext context)
-        {
-            Data.ItemsSource = context.Entries;
         }
     }
 }

@@ -16,6 +16,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MaterialDesignThemes.Wpf;
 using Microsoft.Win32;
+using TimeTracker.Types;
 using Path = System.IO.Path;
 
 namespace TimeTracker.Controls.Modals
@@ -39,19 +40,19 @@ namespace TimeTracker.Controls.Modals
             "xlam", "xlsx", "xltx", "xlsm", "xltm"
         };
 
-        private ApplicationContext _context;
+        private FileHandler _fileHandler;
 
-        public ImportDialog(ApplicationContext context)
+        public ImportDialog(FileHandler file)
         {
-            this._context = context;
+            _fileHandler = file;
 
             InitializeComponent();
-            PathInput.TextChanged += PathChanged;
+            FileSelect.PathInput.TextChanged += PathChanged;
         }
 
         private void PathChanged(object sender, TextChangedEventArgs e)
         {
-            string path = PathInput.Text;
+            string path = FileSelect.PathInput.Text;
 
             if (!File.Exists(path))
             {
@@ -95,19 +96,6 @@ namespace TimeTracker.Controls.Modals
             ContinueButton.IsEnabled = correct;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            OpenFileDialog fileDialog = new OpenFileDialog();
-            bool? dialogResult = fileDialog.ShowDialog();
-            if (dialogResult != true)
-            {
-                return;
-            }
-
-            PathInput.Text = fileDialog.FileName;
-
-        }
-
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             CloseDialog();
@@ -122,11 +110,11 @@ namespace TimeTracker.Controls.Modals
         {
             DialogHost.Close(null);
 
-            ImportInterpretationDialog dialog = new ImportInterpretationDialog(_context);
+            ImportInterpretationDialog dialog = new ImportInterpretationDialog(_fileHandler);
 
             LoadingModal modal = LoadingModal.Display(null, "Interpret File...");
 
-            await dialog.LoadSpreadsheetData(PathInput.Text);
+            await dialog.LoadSpreadsheetData(FileSelect.PathInput.Text);
 
             modal.Remove();
 

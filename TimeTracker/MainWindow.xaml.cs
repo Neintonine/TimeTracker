@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -13,10 +15,13 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using DocumentFormat.OpenXml.Drawing.Charts;
 using MaterialDesignThemes.Wpf;
+using Microsoft.Win32;
 using Microsoft.Xaml.Behaviors.Core;
 using TimeTracker.Controls.Modals;
 using TimeTracker.Types;
+using TimeTracker.ViewModels;
 
 namespace TimeTracker
 {
@@ -25,26 +30,18 @@ namespace TimeTracker
     /// </summary>
     public partial class MainWindow : Window
     {
-        public ICommand ImportSpreadsheet { get; private set; }
-
-        public ApplicationContext AppContext { get; private set; }
+        
 
         public MainWindow()
         {
+            SessionHandler session = new SessionHandler
+            {
+                FileHandler = FileHandler.Create()
+            };
+
             InitializeComponent();
-
-            AppContext = new ApplicationContext();
-            
-            DataContext = this;
-            ImportSpreadsheet = new ActionCommand(ImportSpreadsheetCommand);
-
-            DataEntry.SetContext(AppContext);
-        }
-
-        public void ImportSpreadsheetCommand()
-        {
-            ImportDialog dialog = new ImportDialog(AppContext);
-            DialogHost.Show(dialog);
+            DataContext = new MainWindowViewModel(session);
+            DataEntry.DataContext = new DataEntryViewModel(session);
         }
     }
 }

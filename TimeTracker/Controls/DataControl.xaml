@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="TimeTracker.Controls.DataControl"
+﻿<DataGrid x:Class="TimeTracker.Controls.DataControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -8,8 +8,14 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:System="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <UserControl.Resources>
+             d:DesignHeight="450" d:DesignWidth="800"
+             Style="{StaticResource MaterialDesignDataGrid}"
+             CellStyle="{StaticResource MaterialDesignDataGridCell}"
+             RowStyle="{StaticResource MaterialDesignDataGridRow}"
+             RowHeaderStyle="{StaticResource MaterialDesignDataGridRowHeader}"
+             AutoGenerateColumns="false"
+>
+    <DataGrid.Resources>
         <selector:NullTemplateSelector x:Key="DataDatum">
             <selector:NullTemplateSelector.emptyTemplate>
                 <DataTemplate>
@@ -71,47 +77,45 @@
                 </DataTemplate>
             </selector:StatusTemplateSelector.Booked>
         </selector:StatusTemplateSelector>
-    </UserControl.Resources>
-    <DataGrid ItemsSource="{Binding ItemsSource}" AutoGenerateColumns="False" FrozenColumnCount="5" VerticalContentAlignment="Center">
-        <DataGrid.Columns>
-            <DataGridTemplateColumn Header="Datum" CellTemplateSelector="{StaticResource DataDatum}">
-                <DataGridTemplateColumn.CellEditingTemplate>
-                    <DataTemplate>
-                        <DatePicker SelectedDate="{Binding Path=Date}" IsTodayHighlighted="True"  />
-                    </DataTemplate>
-                </DataGridTemplateColumn.CellEditingTemplate>
-            </DataGridTemplateColumn>
-            <materialDesign:DataGridTextColumn Header="From" Binding="{Binding From}" />
-            <materialDesign:DataGridTextColumn Header="To" Binding="{Binding To}"/>
-            <materialDesign:DataGridTextColumn IsReadOnly="True" Header="Duration" Binding="{Binding Duration}"/>
-            <DataGridTemplateColumn Header="Status" CellTemplateSelector="{StaticResource StatusSelector}"/>
+    </DataGrid.Resources>
+    <DataGrid.Columns>
+        <DataGridTemplateColumn Header="Datum" CellTemplateSelector="{StaticResource DataDatum}">
+            <DataGridTemplateColumn.CellEditingTemplate>
+                <DataTemplate>
+                    <DatePicker SelectedDate="{Binding Path=Date}" IsTodayHighlighted="True"  />
+                </DataTemplate>
+            </DataGridTemplateColumn.CellEditingTemplate>
+        </DataGridTemplateColumn>
+        <materialDesign:DataGridTextColumn Header="From" Binding="{Binding From}" />
+        <materialDesign:DataGridTextColumn Header="To" Binding="{Binding To}"/>
+        <materialDesign:DataGridTextColumn IsReadOnly="True" Header="Duration" Binding="{Binding Duration}"/>
+        <DataGridTemplateColumn Header="Status" CellTemplateSelector="{StaticResource StatusSelector}"/>
 
-            <DataGridTemplateColumn Header="Project">
-                <DataGridTemplateColumn.CellTemplate>
-                    <DataTemplate>
-                        <TextBlock Text="{Binding Path=ProjectVisual}" Opacity="{Binding Path=ProjectVisualOpacity}" />
-                    </DataTemplate>
-                </DataGridTemplateColumn.CellTemplate>
-                <DataGridTemplateColumn.CellEditingTemplate>
-                    <DataTemplate>
-                        <TextBox Text="{Binding Path=ProjectEdit}" MaxLines="1" />
-                    </DataTemplate>
-                </DataGridTemplateColumn.CellEditingTemplate>
-            </DataGridTemplateColumn>
-            <DataGridTemplateColumn Header="Action">
-                <DataGridTemplateColumn.CellTemplate>
-                    <DataTemplate>
-                        <TextBlock Text="{Binding Path=ActionVisual}" Opacity="{Binding Path=ActionVisualOpacity}" />
-                    </DataTemplate>
-                </DataGridTemplateColumn.CellTemplate>
-                <DataGridTemplateColumn.CellEditingTemplate>
-                    <DataTemplate>
-                        <TextBox Text="{Binding Path=ActionEdit}" MaxLines="1" />
-                    </DataTemplate>
-                </DataGridTemplateColumn.CellEditingTemplate>
-            </DataGridTemplateColumn>
+        <DataGridTemplateColumn Header="Project">
+            <DataGridTemplateColumn.CellTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Path=ProjectVisual}" Opacity="{Binding Path=ProjectVisualOpacity}" />
+                </DataTemplate>
+            </DataGridTemplateColumn.CellTemplate>
+            <DataGridTemplateColumn.CellEditingTemplate>
+                <DataTemplate>
+                    <TextBox Text="{Binding Path=ProjectEdit}" MaxLines="1" />
+                </DataTemplate>
+            </DataGridTemplateColumn.CellEditingTemplate>
+        </DataGridTemplateColumn>
+        <DataGridTemplateColumn Header="Action">
+            <DataGridTemplateColumn.CellTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Path=ActionVisual}" Opacity="{Binding Path=ActionVisualOpacity}" />
+                </DataTemplate>
+            </DataGridTemplateColumn.CellTemplate>
+            <DataGridTemplateColumn.CellEditingTemplate>
+                <DataTemplate>
+                    <TextBox Text="{Binding Path=ActionEdit}" MaxLines="1" />
+                </DataTemplate>
+            </DataGridTemplateColumn.CellEditingTemplate>
+        </DataGridTemplateColumn>
 
-        </DataGrid.Columns>
+    </DataGrid.Columns>
 
-    </DataGrid>
-</UserControl>
+</DataGrid>

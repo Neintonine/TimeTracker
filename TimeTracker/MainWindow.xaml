@@ -3,21 +3,28 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:TimeTracker"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:timeTracker="clr-namespace:TimeTracker" 
+        xmlns:viewModels="clr-namespace:TimeTracker.ViewModels" 
+        xmlns:types="clr-namespace:TimeTracker.Types"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800"
+        Title="{Binding Path=FilePath, StringFormat={}{0} - TimeTracker }" Height="450" Width="800"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
         TextElement.FontSize="13"
         TextOptions.TextFormattingMode="Ideal" 
         TextOptions.TextRenderingMode="Auto"        
         Background="{DynamicResource MaterialDesignPaper}"
-        FontFamily="{DynamicResource MaterialDesignFont}">
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        >
     <materialDesign:DialogHost>
         <DockPanel>
             <Menu DockPanel.Dock="Top">
                 <MenuItem Header="_File">
+                    <MenuItem Header="_New File" Command="{Binding CreateNewFileCommand}" />
+                    <MenuItem Header="_Load" />
+                    <Separator />
                     <MenuItem Header="_Import" Command="{Binding ImportSpreadsheet}" />
                     <MenuItem Header="_Export" />
                     <Separator />

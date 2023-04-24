@@ -31,7 +31,7 @@ namespace TimeTracker.Controls.Modals
     /// </summary>
     public partial class ImportInterpretationDialog : UserControl, INotifyPropertyChanged
     {
-        private readonly ApplicationContext _applicationContext;
+        private readonly FileHandler _fileHandler;
         private int _statusColumnIndex = 0;
 
         public List<string> ColumnNames { get; private set; }
@@ -72,9 +72,10 @@ namespace TimeTracker.Controls.Modals
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public ImportInterpretationDialog(ApplicationContext applicationContext)
+        public ImportInterpretationDialog(FileHandler fileHandler)
         {
-            _applicationContext = applicationContext;
+            _fileHandler = fileHandler;
+
             InitializeComponent();
             DataContext = this;
         }
@@ -214,7 +215,7 @@ namespace TimeTracker.Controls.Modals
 
             foreach (TimeEntry entry in entries)
             {
-                _applicationContext.Entries.Add(entry);
+                _fileHandler.Entries.Add(entry);
             }
         }
 
