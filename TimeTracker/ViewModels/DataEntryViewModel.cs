@@ -11,4 +11,9 @@ public class DataEntryViewModel: SessionViewModelBase
 
     public DataEntryViewModel(SessionHandler sessionHandler) : base(sessionHandler)
     { }
+
+    public override void HandleFileChange()
+    {
+        OnPropertyChanged(nameof(Entries));
+    }
 }

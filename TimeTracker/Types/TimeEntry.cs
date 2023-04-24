@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Windows.Input;
+using SQLite;
 
 namespace TimeTracker.Types
 {
@@ -16,6 +17,9 @@ namespace TimeTracker.Types
             DontBook,
             Booked,
         }
+
+        [PrimaryKey, AutoIncrement]
+        public int ID {get; set; }
 
         public ICommand SetStatusBooked { get; private set; }
         public ICommand SetStatusDontBook { get; private set; }

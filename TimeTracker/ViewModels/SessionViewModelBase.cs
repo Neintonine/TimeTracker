@@ -9,5 +9,9 @@ public class SessionViewModelBase : ViewModelBase
     public SessionViewModelBase(SessionHandler sessionHandler)
     {
         SessionHandler = sessionHandler;
+        sessionHandler.Register(this);
     }
+
+    public virtual void HandleFileChange()
+    { }
 }

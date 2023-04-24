@@ -1,14 +1,35 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using TimeTracker.ViewModels;
 
 namespace TimeTracker.Types;
 
 public class SessionHandler: INotifyPropertyChanged
 {
-    public FileHandler FileHandler { get; set; }
+    private List<SessionViewModelBase> _registeredViewModels = new();
+
+    private FileHandler _fileHandler;
+
+    public FileHandler FileHandler
+    {
+        get => _fileHandler;
+        set
+        {
+            _fileHandler = value;
+            foreach (SessionViewModelBase viewModel in _registeredViewModels)
+            {
+                viewModel.HandleFileChange();
+            }
+        }
+    }
 
     public event PropertyChangedEventHandler PropertyChanged;
+
+    public void Register(SessionViewModelBase viewModel)
+    {
+        _registeredViewModels.Add(viewModel);
+    }
 
     protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
     {

@@ -22,8 +22,9 @@
         <DockPanel>
             <Menu DockPanel.Dock="Top">
                 <MenuItem Header="_File">
-                    <MenuItem Header="_New File" Command="{Binding CreateNewFileCommand}" />
-                    <MenuItem Header="_Load" />
+                    <MenuItem Header="_New File" Command="{Binding CreateNewFile}" />
+                    <MenuItem Header="_Save" Command="{Binding SaveFile}" />
+                    <MenuItem Header="_Load" Command="{Binding LoadFile}" />
                     <Separator />
                     <MenuItem Header="_Import" Command="{Binding ImportSpreadsheet}" />
                     <MenuItem Header="_Export" />
