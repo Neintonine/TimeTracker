@@ -12,7 +12,6 @@
              Style="{StaticResource MaterialDesignDataGrid}"
              CellStyle="{StaticResource MaterialDesignDataGridCell}"
              RowStyle="{StaticResource MaterialDesignDataGridRow}"
-             RowHeaderStyle="{StaticResource MaterialDesignDataGridRowHeader}"
              AutoGenerateColumns="false"
 >
     <DataGrid.Resources>
