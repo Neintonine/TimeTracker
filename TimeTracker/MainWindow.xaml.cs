@@ -21,6 +21,7 @@ using Microsoft.Win32;
 using Microsoft.Xaml.Behaviors.Core;
 using TimeTracker.Controls.Modals;
 using TimeTracker.Types;
+using TimeTracker.Types.Prefs;
 using TimeTracker.ViewModels;
 
 namespace TimeTracker
@@ -34,7 +35,13 @@ namespace TimeTracker
 
         public MainWindow()
         {
-            SessionHandler session = new SessionHandler
+            IPreferenceHandler preferenceHandler = new JsonPreferences();
+            if (preferenceHandler.CanLoad)
+            {
+                preferenceHandler.Load();
+            }
+
+            SessionHandler session = new SessionHandler(preferenceHandler)
             {
                 FileHandler = FileHandler.Create()
             };

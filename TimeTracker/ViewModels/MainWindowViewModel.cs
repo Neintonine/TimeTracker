@@ -22,6 +22,11 @@ public class MainWindowViewModel: SessionViewModelBase
     
     public MainWindowViewModel(SessionHandler session): base(session)
     {
+        if (!string.IsNullOrEmpty(session.Preferences.Values.LastSave))
+        {
+            LoadingFile(session.Preferences.Values.LastSave, "Loading previous file...");
+        }
+
         CreateNewFile = new ActionCommand(CreateNewFileCommand);
         SaveFile = new ActionCommand(SaveFileCommand);
         LoadFile = new ActionCommand(LoadFileCommand);
@@ -44,6 +49,7 @@ public class MainWindowViewModel: SessionViewModelBase
 
         LoadingModal modal = LoadingModal.Display("Loading...");
         SessionHandler.FileHandler = await FileHandler.Load(dialog.FileName);
+        SessionHandler.Preferences.Values.LastSave = path;
         modal.Remove();
     }
 

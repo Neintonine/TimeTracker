@@ -143,6 +143,7 @@
     <Compile Include="Types\FileHandler.cs" />
     <Compile Include="Types\Prefs\IPreferenceHandler.cs" />
     <Compile Include="Types\Prefs\JsonPreferences.cs" />
+    <Compile Include="Types\Prefs\PreferenceValues.cs" />
     <Compile Include="Types\SessionHandler.cs" />
     <Compile Include="Types\TimeEntry.cs" />
     <Compile Include="Types\TimeEntryPublic.cs" />
