@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using TimeTracker.Types.Prefs;
 using TimeTracker.ViewModels;
 
 namespace TimeTracker.Types;
@@ -8,8 +9,14 @@ namespace TimeTracker.Types;
 public class SessionHandler: INotifyPropertyChanged
 {
     private List<SessionViewModelBase> _registeredViewModels = new();
+    private IPreferenceHandler _preferences;
 
     private FileHandler _fileHandler;
+
+    public SessionHandler(IPreferenceHandler preferences)
+    {
+        _preferences = preferences;
+    }
 
     public FileHandler FileHandler
     {
@@ -23,6 +30,8 @@ public class SessionHandler: INotifyPropertyChanged
             }
         }
     }
+
+    public IPreferenceHandler Preferences => _preferences;
 
     public event PropertyChangedEventHandler PropertyChanged;
 

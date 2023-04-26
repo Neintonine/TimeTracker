@@ -56,8 +56,8 @@ namespace TimeTracker.Types
             }
         }
 
-        public bool ProjectIsSet => _project != null;
-        public bool ActionIsSet => _action != null;
+        public bool ProjectIsSet => !string.IsNullOrEmpty(_project);
+        public bool ActionIsSet => !string.IsNullOrEmpty(_action);
 
         public float ProjectVisualOpacity => ProjectIsSet ? 1f : 0.5f;
         public float ActionVisualOpacity => ActionIsSet ? 1f : 0.5f;
@@ -69,7 +69,7 @@ namespace TimeTracker.Types
             set => _action = value;
         }
 
-        public string ActionVisual => _action ?? "";
+        public string ActionVisual => ActionIsSet ? _action : "[No action set]";
 
         public string ProjectEdit
         {
@@ -78,7 +78,7 @@ namespace TimeTracker.Types
             set => _project = value;
         }
 
-        public string ProjectVisual => _project ?? "[No project set]";
+        public string ProjectVisual => ProjectIsSet ? _project : "[No project set]";
 
         private string ConvertTimeToString(DateTime? time)
         {

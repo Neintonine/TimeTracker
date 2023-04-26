@@ -14,6 +14,8 @@ public class MainWindowViewModel: SessionViewModelBase
 {
 
     public string FilePath => SessionHandler.FileHandler.Path;
+    public bool SaveEnabled => SessionHandler.FileHandler.IsNew;
+    public string SaveText => "_Save" + (SessionHandler.FileHandler.IsNew ? "" : " - Auto saved");
 
     public ICommand ImportSpreadsheet { get; private set; }
     public ICommand CreateNewFile{ get; private set; }
@@ -34,12 +36,14 @@ public class MainWindowViewModel: SessionViewModelBase
         ImportSpreadsheet = new ActionCommand(ImportSpreadsheetCommand);
     }
 
-    private async void LoadFileCommand()
+    private void LoadFileCommand()
     {
-        OpenFileDialog dialog = new OpenFileDialog();
-        dialog.AddExtension = true;
-        dialog.DefaultExt = ".sav";
-        dialog.Filter = "Time Tracker file (.sav)|*.sav";
+        OpenFileDialog dialog = new OpenFileDialog
+        {
+            AddExtension = true,
+            DefaultExt = ".sav",
+            Filter = "Time Tracker file (.sav)|*.sav"
+        };
 
         bool? result = dialog.ShowDialog();
         if (result != true)
@@ -47,9 +51,15 @@ public class MainWindowViewModel: SessionViewModelBase
             return;
         }
 
-        LoadingModal modal = LoadingModal.Display("Loading...");
-        SessionHandler.FileHandler = await FileHandler.Load(dialog.FileName);
+        LoadingFile(dialog.FileName);
+    }
+
+    private async void LoadingFile(string path, string loadingTitle = "Loading...")
+    {
         SessionHandler.Preferences.Values.LastSave = path;
+
+        LoadingModal modal = LoadingModal.Display(loadingTitle);
+        SessionHandler.FileHandler = await FileHandler.Load(path);
         modal.Remove();
     }
 
@@ -60,12 +70,14 @@ public class MainWindowViewModel: SessionViewModelBase
 
     public async void SaveFileCommand()
     {
-        SaveFileDialog dialog = new SaveFileDialog();
+        SaveFileDialog dialog = new SaveFileDialog
+        {
+            CheckPathExists = true,
+            AddExtension = true,
+            OverwritePrompt = true,
+            DefaultExt = ".sav"
+        };
 
-        dialog.CheckPathExists = true;
-        dialog.AddExtension = true;
-        dialog.OverwritePrompt = true;
-        dialog.DefaultExt = ".sav";
         bool? result = dialog.ShowDialog();
 
         if (result != true)
@@ -74,6 +86,7 @@ public class MainWindowViewModel: SessionViewModelBase
         }
 
         await SessionHandler.FileHandler.Save(dialog.FileName);
+        SessionHandler.Preferences.Values.LastSave = dialog.FileName;
 
         OnPropertyChanged(nameof(FilePath));
     }
@@ -81,6 +94,8 @@ public class MainWindowViewModel: SessionViewModelBase
     public override void HandleFileChange()
     {
         OnPropertyChanged(nameof(FilePath));
+        OnPropertyChanged(nameof(SaveText));
+        OnPropertyChanged(nameof(SaveEnabled));
     }
 
     public void ImportSpreadsheetCommand()
