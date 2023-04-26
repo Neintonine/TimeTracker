@@ -7,6 +7,7 @@ namespace TimeTracker.Types
 {
     public partial class TimeEntry
     {
+        public FileHandler File { get; set; }
 
         public DateTime Date
         {
@@ -70,6 +71,7 @@ namespace TimeTracker.Types
         }
 
         public string ActionVisual => ActionIsSet ? _action : "[No action set]";
+        public string[] ActionRecommendation => File.GetActions(ProjectEdit);
 
         public string ProjectEdit
         {
@@ -79,6 +81,7 @@ namespace TimeTracker.Types
         }
 
         public string ProjectVisual => ProjectIsSet ? _project : "[No project set]";
+        public string[] ProjectRecommendation => File.GetProjects();
 
         private string ConvertTimeToString(DateTime? time)
         {

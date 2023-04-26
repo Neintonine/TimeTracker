@@ -98,7 +98,7 @@
             </DataGridTemplateColumn.CellTemplate>
             <DataGridTemplateColumn.CellEditingTemplate>
                 <DataTemplate>
-                    <TextBox Text="{Binding Path=ProjectEdit}" MaxLines="1" />
+                    <ComboBox Text="{Binding Path=ProjectEdit}" IsEditable="True" ItemsSource="{Binding ProjectRecommendation}"  />
                 </DataTemplate>
             </DataGridTemplateColumn.CellEditingTemplate>
         </DataGridTemplateColumn>
@@ -110,7 +110,7 @@
             </DataGridTemplateColumn.CellTemplate>
             <DataGridTemplateColumn.CellEditingTemplate>
                 <DataTemplate>
-                    <TextBox Text="{Binding Path=ActionEdit}" MaxLines="1" />
+                    <ComboBox Text="{Binding Path=ActionEdit}" IsEditable="True" ItemsSource="{Binding ActionRecommendation}" />
                 </DataTemplate>
             </DataGridTemplateColumn.CellEditingTemplate>
         </DataGridTemplateColumn>

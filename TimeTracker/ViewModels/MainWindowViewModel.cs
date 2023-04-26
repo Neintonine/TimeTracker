@@ -89,6 +89,8 @@ public class MainWindowViewModel: SessionViewModelBase
         SessionHandler.Preferences.Values.LastSave = dialog.FileName;
 
         OnPropertyChanged(nameof(FilePath));
+        OnPropertyChanged(nameof(SaveText));
+        OnPropertyChanged(nameof(SaveEnabled));
     }
 
     public override void HandleFileChange()
