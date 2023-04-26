@@ -57,7 +57,14 @@ namespace TimeTracker.Controls.Modals
 
         public void Remove()
         {
-            DialogHost.Close(null);
+            try
+            {
+                DialogHost.Close(null);
+            }
+            catch
+            {
+                // ignored
+            }
         }
 
         public static LoadingModal Display(
