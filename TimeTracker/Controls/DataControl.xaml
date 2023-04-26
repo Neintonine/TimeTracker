@@ -55,7 +55,7 @@
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="Don't book"/>
-                        <Button Style="{DynamicResource MaterialDesignFlatButton}">
+                        <Button Style="{DynamicResource MaterialDesignFlatButton}" Command="{Binding SetStatusBooked}">
                             <Button.Content>
                                 <materialDesign:PackIcon Kind="Check" Foreground="Green" />
                             </Button.Content>
@@ -67,7 +67,7 @@
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="Booked"/>
-                        <Button Style="{DynamicResource MaterialDesignFlatButton}">
+                        <Button Style="{DynamicResource MaterialDesignFlatButton}" Command="{Binding SetStatusDontBook}">
                             <Button.Content>
                                 <materialDesign:PackIcon Kind="Close" Foreground="Red" />
                             </Button.Content>

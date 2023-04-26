@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,26 +19,37 @@ namespace TimeTracker.Selector
 
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
         {
-            if (
-                item != null &&
-                item is TimeEntry entry
-                )
+            if (item is not TimeEntry entry) return Empty;
+            
+            PropertyChangedEventHandler ev = null;
+            ev = (sender, args) =>
             {
-
-                if (entry.BookingStatus == TimeEntry.Status.NoStatus)
+                if (args.PropertyName != "BookingStatus")
                 {
-                    return NoStatus;
+                    return;
                 }
 
-                if (entry.BookingStatus == TimeEntry.Status.DontBook)
-                {
-                    return DontBook;
-                }
+                entry.PropertyChanged -= ev;
 
-                if (entry.BookingStatus == TimeEntry.Status.Booked) 
-                {
-                    return Booked;
-                }
+                ContentPresenter cp = (ContentPresenter)container;
+                cp.ContentTemplateSelector = null;
+                cp.ContentTemplateSelector = this;
+            };
+            entry.PropertyChanged += ev;
+                
+            if (entry.BookingStatus == TimeEntry.Status.NoStatus)
+            {
+                return NoStatus;
+            }
+
+            if (entry.BookingStatus == TimeEntry.Status.DontBook)
+            {
+                return DontBook;
+            }
+
+            if (entry.BookingStatus == TimeEntry.Status.Booked) 
+            {
+                return Booked;
             }
 
             return Empty;
