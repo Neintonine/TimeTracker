@@ -6,13 +6,25 @@
              xmlns:local="clr-namespace:TimeTracker.Controls"
              xmlns:selector="clr-namespace:TimeTracker.Selector"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-    xmlns:wpf="clr-namespace:MaterialDesignThemes.Wpf;assembly=MaterialDesignThemes.Wpf" xmlns:System="clr-namespace:System;assembly=mscorlib"
+             xmlns:wpf="clr-namespace:MaterialDesignThemes.Wpf;assembly=MaterialDesignThemes.Wpf" 
+             xmlns:System="clr-namespace:System;assembly=mscorlib"
              xmlns:viewModels="clr-namespace:TimeTracker.ViewModels" 
+             xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
              xmlns:types="clr-namespace:TimeTracker.Types"
              x:Class="TimeTracker.DataEntry"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
     >
+    <UserControl.Resources>
+        <CollectionViewSource x:Key="EntryViewSource" Source="{Binding Path=Entries}">
+            <CollectionViewSource.GroupDescriptions>
+                <PropertyGroupDescription PropertyName="Date" />
+            </CollectionViewSource.GroupDescriptions>
+            <CollectionViewSource.SortDescriptions>
+                <scm:SortDescription PropertyName="Date" Direction="Descending" />
+            </CollectionViewSource.SortDescriptions>
+        </CollectionViewSource>
+    </UserControl.Resources>
     <DockPanel>
         <Expander DockPanel.Dock="Top" Header="Filters">
             <Grid Margin="10,0,0,0">
@@ -55,7 +67,7 @@
                 </DockPanel>
             </Expander>
 
-            <local:DataControl x:Name="Data" ItemsSource="{Binding Entries}" />
+            <local:DataControl x:Name="Data" ItemsSource="{Binding Source={StaticResource EntryViewSource}}" />
         </DockPanel>
     </DockPanel>
 </UserControl>

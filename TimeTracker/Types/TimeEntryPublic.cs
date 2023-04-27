@@ -7,7 +7,7 @@ namespace TimeTracker.Types
 {
     public partial class TimeEntry
     {
-        public FileHandler File { get; set; }
+        public FileHandler File { private get; set; }
 
         public DateTime Date
         {
