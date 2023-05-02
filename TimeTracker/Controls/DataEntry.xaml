@@ -16,9 +16,9 @@
              d:DesignHeight="450" d:DesignWidth="800"
     >
     <UserControl.Resources>
-        <CollectionViewSource x:Key="EntryViewSource" Source="{Binding Path=Entries}">
+        <CollectionViewSource x:Key="EntryViewSource" x:Name="EntryViewSource" Source="{Binding Path=Entries}">
             <CollectionViewSource.GroupDescriptions>
-                <PropertyGroupDescription PropertyName="Date" />
+                <PropertyGroupDescription PropertyName="CalenderWeek" />
             </CollectionViewSource.GroupDescriptions>
             <CollectionViewSource.SortDescriptions>
                 <scm:SortDescription PropertyName="Date" Direction="Descending" />
@@ -39,14 +39,14 @@
 
                 <Label Content="Time:" FontSize="16" VerticalAlignment="Center" Height="29" />
 
-                <ListBox Grid.Column="1" Style="{DynamicResource MaterialDesignFilterChipListBox}" SelectionMode="Single">
+                <ListBox x:Name="TimeFilter" Grid.Column="1" Style="{DynamicResource MaterialDesignFilterChipListBox}" SelectionMode="Single" SelectionChanged="TimeFilter_SelectionChanged">
                     <System:String>Today</System:String>
                     <System:String>This Week</System:String>
                     <System:String>This Month</System:String>
                 </ListBox>
 
                 <Label Content="Status:" FontSize="16" VerticalAlignment="Center" Grid.Row="1" Height="29" />
-                <ListBox Grid.Column="1" Style="{DynamicResource MaterialDesignFilterChipListBox}" SelectionMode="Single" Grid.Row="1">
+                <ListBox x:Name="BookedFilter" Grid.Column="1" Style="{DynamicResource MaterialDesignFilterChipListBox}" SelectionMode="Single" Grid.Row="1" SelectionChanged="BookedFilter_SelectionChanged">
                     <System:String>Not booked</System:String>
                     <System:String>Will not be booked</System:String>
                     <System:String>Booked</System:String>

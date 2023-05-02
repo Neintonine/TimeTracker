@@ -30,7 +30,6 @@ namespace TimeTracker.Controls
             InitializeComponent();
 
             CurrentCellChanged += _data_CurrentCellChanged;
-            //_data.RowEditEnding += Data_RowEditEnding;
         }
 
         private void _data_CurrentCellChanged(object sender, EventArgs e)

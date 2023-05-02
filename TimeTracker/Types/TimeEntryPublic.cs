@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DocumentFormat.OpenXml.Vml.Office;
+using System;
 using System.Diagnostics;
 using System.Globalization;
 using System.Security.Policy;
@@ -14,6 +15,9 @@ namespace TimeTracker.Types
             get => _date;
             set => _date = value;
         }
+
+        public int CalenderWeek =>
+            new CultureInfo("de-de").Calendar.GetWeekOfYear(Date, CalendarWeekRule.FirstDay, DayOfWeek.Monday);
 
         public string From
         {
