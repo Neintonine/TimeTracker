@@ -116,7 +116,7 @@
         <materialDesign:DataGridTextColumn IsReadOnly="True" Header="Duration" Binding="{Binding Duration}"/>
         <DataGridTemplateColumn Header="Status" CellTemplateSelector="{StaticResource StatusSelector}"/>
 
-        <DataGridTemplateColumn Header="Project">
+        <DataGridTemplateColumn Header="Project" CanUserResize="True">
             <DataGridTemplateColumn.CellTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding Path=ProjectVisual}" Opacity="{Binding Path=ProjectVisualOpacity}" />
@@ -128,7 +128,7 @@
                 </DataTemplate>
             </DataGridTemplateColumn.CellEditingTemplate>
         </DataGridTemplateColumn>
-        <DataGridTemplateColumn Header="Action">
+        <DataGridTemplateColumn Header="Action" CanUserResize="True">
             <DataGridTemplateColumn.CellTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding Path=ActionVisual}" Opacity="{Binding Path=ActionVisualOpacity}" />

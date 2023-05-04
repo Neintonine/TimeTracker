@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -30,6 +31,30 @@ namespace TimeTracker.Controls
             InitializeComponent();
 
             CurrentCellChanged += _data_CurrentCellChanged;
+            if (Items is INotifyCollectionChanged collection)
+            {
+                collection.CollectionChanged += AutoScroll;
+            }
+        }
+
+        private void AutoScroll(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            if (Items.Count <= 0)
+            {
+                return;
+            }
+
+            if (VisualTreeHelper.GetChild(this, 0) is not Decorator border)
+            {
+                return;
+            }
+
+            if (border.Child is not ScrollViewer viewer)
+            {
+                return;
+            }
+
+            viewer.ScrollToEnd();
         }
 
         private void _data_CurrentCellChanged(object sender, EventArgs e)
